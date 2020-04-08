@@ -503,7 +503,7 @@ workflows:
     build_and_test:
         jobs:
             # - build-monorepo-root
-            # - build-backend-api
+            - build-backend-api
             # - build-admin-website-angular
             # - build-merchant-tablet-ionic
             # - build-shop-mobile-ionic
