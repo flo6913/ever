@@ -67,7 +67,7 @@ jobs:
                   command: yarn install
             - run:
                   name: Run Bootstrap
-				  command: yarn bootstrap
+                  command: yarn bootstrap
             - save_cache:
                   name: Save Yarn Package Cache
                   key: yarn-packages-monorepo-root-{{ checksum "yarn.lock" }}
@@ -111,19 +111,17 @@ jobs:
                   paths:
 					  - '*'
 			# !!! This installs AWS Elastic Beanstalk CLI 'awsebcli' !!!
-				- run:
-					name: Installing deployment dependencies
-					working_directory: /
-					command: |
-						sudo apt-get -y -qq update
-						sudo apt-get install python-pip python-dev build-essential
-						sudo pip install awsebcli --upgrade
+			- run:
+				  name: Installing deployment dependencies
+				  working_directory: /
+				  command: |
+					sudo apt-get -y -qq update
+					sudo apt-get install python-pip python-dev build-essential
+					sudo pip install awsebcli --upgrade
 			# !!! This runs a deployment
-				- run:
-					name: Deploying
-					command: eb deploy Marketplace64Backend-env
-
-
+			- run:
+				  name: Deploying
+				  command: eb deploy Marketplace64Backend-env
     build-admin-website-angular:
         <<: *defaults
         working_directory: /tmp/workspace/admin/website-angular
@@ -504,8 +502,8 @@ workflows:
     version: 2
     build_and_test:
         jobs:
-            # build-monorepo-root
-			- build-backend-api
+            # - build-monorepo-root
+            # - build-backend-api
             # - build-admin-website-angular
             # - build-merchant-tablet-ionic
             # - build-shop-mobile-ionic
