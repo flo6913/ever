@@ -109,6 +109,16 @@ jobs:
                   root: /tmp/workspace/backend/api
                   paths:
                       - '*'
+            - run:
+                  name: Installing deployment dependencies
+                  working_directory: /
+                  command: |
+                      sudo apt-get -y -qq update
+                      sudo apt-get install python-pip python-dev build-essential
+                      sudo pip install awsebcli --upgrade
+            - run:
+                  name: Deploying
+                  command: eb deploy Marketplace64Backend-env
     build-admin-website-angular:
         <<: *defaults
         working_directory: /tmp/workspace/admin/website-angular
