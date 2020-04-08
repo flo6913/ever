@@ -34,7 +34,6 @@ aliases:
           rm -rf ~/.yarn
           curl -o- -L https://yarnpkg.com/install.sh | bash
           echo 'export PATH="${PATH}:${HOME}/.yarn/bin:${HOME}/.config/yarn/global/node_modules/.bin"' >> $BASH_ENV
-
 defaults: &defaults
     # put here anything which is common between all jobs
     # we define default work dir, however almost every job redefine it
@@ -109,19 +108,7 @@ jobs:
             - persist_to_workspace:
                   root: /tmp/workspace/backend/api
                   paths:
-					  - '*'
-			# !!! This installs AWS Elastic Beanstalk CLI 'awsebcli' !!!
-			- run:
-				  name: Installing deployment dependencies
-				  working_directory: /
-				  command: |
-					sudo apt-get -y -qq update
-					sudo apt-get install python-pip python-dev build-essential
-					sudo pip install awsebcli --upgrade
-			# !!! This runs a deployment
-			- run:
-				  name: Deploying
-				  command: eb deploy Marketplace64Backend-env
+                      - '*'
     build-admin-website-angular:
         <<: *defaults
         working_directory: /tmp/workspace/admin/website-angular
@@ -502,13 +489,13 @@ workflows:
     version: 2
     build_and_test:
         jobs:
-            # - build-monorepo-root
+            #- build-monorepo-root
             - build-backend-api
-            # - build-admin-website-angular
-            # - build-merchant-tablet-ionic
-            # - build-shop-mobile-ionic
-            # - build-shop-website-angular
-            # - build-carrier-mobile-ionic
+            #- build-admin-website-angular
+            #- build-merchant-tablet-ionic
+            #- build-shop-mobile-ionic
+            #- build-shop-website-angular
+            #- build-carrier-mobile-ionic
             # - test-admin-website-angular:
             # requires:
             # - build-admin-website-angular
